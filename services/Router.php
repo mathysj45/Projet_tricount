@@ -37,6 +37,15 @@ class Router
             else if($_GET['route'] === 'reimbursement') {
                 $this->uc->reimbursement();
             }
+            else if($_GET['route'] === 'delete') {
+                $this->uc->delete();
+            }
+            else if($_GET['route'] === 'show') {
+                $this->uc->show();
+            }
+            else if($_GET['route'] === 'create') {
+                $this->uc->create();
+            }
             else
             {
                 $this->ac->notFound();

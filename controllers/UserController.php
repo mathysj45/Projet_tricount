@@ -4,7 +4,8 @@ class UserController extends AbstractController
 {
     private function checkAdmin() : void
     {
-        if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'ADMIN') {
+        if (!isset($_SESSION['user'])) 
+        {
             $this->redirect('index.php?route=login');
             exit;
         }
@@ -12,7 +13,7 @@ class UserController extends AbstractController
 
     public function profile() : void
     {
-        if (!isset($_SESSION['id'])) {
+        if (!isset($_SESSION['user'])) {
             $this->redirect('index.php?route=login');
             exit;
         }
