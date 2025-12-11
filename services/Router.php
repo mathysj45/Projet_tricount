@@ -4,10 +4,12 @@ class Router
 {
     private AuthController $ac;
     private UserController $uc;
+    private ExpenseController $ec;
     public function __construct()
     {
         $this->ac = new AuthController();
         $this->uc = new UserController();
+        $this->ec = new ExpenseController();
     }
 
     public function handleRequest() : void
@@ -36,6 +38,9 @@ class Router
             }
             else if($_GET['route'] === 'reimbursement') {
                 $this->uc->reimbursement();
+            }
+            else if($_GET['route'] === 'add_expense') {
+                $this->ec->add();
             }
             else
             {
