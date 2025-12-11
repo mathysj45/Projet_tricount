@@ -41,6 +41,14 @@ class Router
             }
             else if($_GET['route'] === 'add_expense') {
                 $this->ec->add();
+            else if($_GET['route'] === 'delete') {
+                $this->uc->delete();
+            }
+            else if($_GET['route'] === 'show') {
+                $this->uc->show();
+            }
+            else if($_GET['route'] === 'create') {
+                $this->uc->create();
             }
             else
             {
