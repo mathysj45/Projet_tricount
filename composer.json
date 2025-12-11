@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "mathilde/exercice-back-office",
+=======
+  "name": "votrenom/exercice-api",
+>>>>>>> 1f8fc585d3c72c18e16e908396c53c10b99ae0a1
   "require": {
     "vlucas/phpdotenv": "^5.6",
     "symfony/var-dumper": "^7.0",
@@ -13,4 +17,8 @@
       "services/"
     ]
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 1f8fc585d3c72c18e16e908396c53c10b99ae0a1
