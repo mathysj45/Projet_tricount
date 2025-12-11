@@ -9,18 +9,6 @@ class UserController extends AbstractController
 
     public function create() :void
     {
-
-        // if (!isset($_SESSION['user'])) 
-        // {
-        //     $this->redirect('index.php?route=login');
-        //     exit;
-        // }
-        // $user = $_SESSION['user'];
-        // if($user->getRole() !== "ADMIN" )
-        // {
-        //     $this->redirect('index.php?route=login');
-        // }
-
         $errors=[];
         if(!empty($_POST))
         {
@@ -64,17 +52,6 @@ class UserController extends AbstractController
 
     public function update() : void
     {
-        // if (!isset($_SESSION['user'])) 
-        // {
-        //     $this->redirect('index.php?route=login');
-        //     exit;
-        // }
-        // $user = $_SESSION['user'];
-        // if($user->getRole() !== "ADMIN" )
-        // {
-        //     $this->redirect('index.php?route=login');
-        // }
-
         if(isset($_GET['id'])) 
         {
             $id = (int)$_GET['id'];
@@ -112,19 +89,6 @@ class UserController extends AbstractController
 
     public function delete() : void
     {
-        // if (!isset($_SESSION['user'])) 
-        // {
-        //     $this->redirect('index.php?route=login');
-        //     exit;
-        // }
-
-        // $user = $_SESSION['user'];
-
-        // if($user->getRole() !== "ADMIN" )
-        // {
-        //     $this->redirect('index.php?route=login');
-        // }
-
         $userManager = new UserManager();
         $users = $userManager->findAll();
 
@@ -143,16 +107,6 @@ class UserController extends AbstractController
 
     public function list() : void
     {
-        // if (!isset($_SESSION['user'])) 
-        // {
-        //     $this->redirect('index.php?route=login');
-        //     exit;
-        // }
-        // $user = $_SESSION['user'];
-        // if($user->getRole() !== "ADMIN" )
-        // {
-        //     $this->redirect('index.php?route=login');
-        // }
         $userManager = new UserManager();
         $users = $userManager->findAll();
         $this->render('admin/users/index.html.twig', ['users'=>$users]);
@@ -160,16 +114,6 @@ class UserController extends AbstractController
 
     public function show() : void
     {
-        // if (!isset($_SESSION['user'])) 
-        // {
-        //     $this->redirect('index.php?route=login');
-        //     exit;
-        // }
-        // $user = $_SESSION['user'];
-        // if($user->getRole() !== "ADMIN" )
-        // {
-        //     $this->redirect('index.php?route=login');
-        // }
 
         if(isset($_GET['id'])) 
         {
