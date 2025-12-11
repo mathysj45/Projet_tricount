@@ -9,7 +9,7 @@ class UserManager extends AbstractManager
 
     public function findAll() : array
     {
-        $query = $this->db->prepare('SELECT * FROM users');
+        $query = $this->db->prepare('SELECT * FROM user');
         $parameters = [
 
         ];
@@ -19,7 +19,7 @@ class UserManager extends AbstractManager
 
         foreach($result as $item)
         {
-            $user = new User($item["firstName"], $item["lastName"], $item["email"], $item["password"], $item["role"], $item["id"]);
+            $user = new User($item["email"], $item["password"], $item["username"], $item["id"]);
             $users[] = $user;
         }
 
@@ -28,7 +28,7 @@ class UserManager extends AbstractManager
 
     public function findById(int $id) : ? User
     {
-        $query = $this->db->prepare('SELECT * FROM users WHERE id = :id');
+        $query = $this->db->prepare('SELECT * FROM user WHERE id = :id');
         $parameters = [
             "id" => $id
         ];
@@ -37,7 +37,7 @@ class UserManager extends AbstractManager
 
         if($item)
         {
-            return new User($item["firstName"], $item["lastName"], $item["email"], $item["password"], $item["role"], $item["id"]);
+            return new User($item["email"], $item["password"], $item["username"], $item["id"]);
         }
 
         return null;
@@ -45,7 +45,7 @@ class UserManager extends AbstractManager
 
     public function findByEmail(string $email) : ? User
     {
-        $query = $this->db->prepare('SELECT * FROM users WHERE email = :email');
+        $query = $this->db->prepare('SELECT * FROM user WHERE email = :email');
         $parameters = [
             "email" => $email
         ];
@@ -54,7 +54,7 @@ class UserManager extends AbstractManager
 
         if($item)
         {
-            return new User($item["firstName"], $item["lastName"], $item["email"], $item["password"], $item["role"], $item["id"]);
+            return new User($item["email"], $item["password"], $item["username"], $item["id"]);
         }
 
         return null;
@@ -62,34 +62,30 @@ class UserManager extends AbstractManager
 
     public function create(User $user) : void
     {
-        $query = $this->db->prepare('INSERT INTO users (firstName, lastName, email, password, role) VALUES (:firstName, :lastName, :email, :password, :role)');;
+        $query = $this->db->prepare('INSERT INTO user (email, password, username) VALUES (:email, :password, :username)');
         $parameters = [
-            "firstName" => $user->getFirstName(),
-            "lastName" => $user->getLastName(),
             "email" => $user->getEmail(),
             "password" => $user->getPassword(),
-            "role" => $user->getRole()
+            "username" => $user->getUsername()
         ];
         $query->execute($parameters);
     }
 
     public function update(User $user) : void
     {
-        $query = $this->db->prepare('UPDATE users SET firstName = :firstName, lastName = :lastName, email = :email, password = :password, role = :role WHERE id = :id');;
+        $query = $this->db->prepare('UPDATE user SET email = :email, password = :password, username = :username WHERE id = :id');;
         $parameters = [
             "id" => $user->getId(),
-            "firstName" => $user->getFirstName(),
-            "lastName" => $user->getLastName(),
             "email" => $user->getEmail(),
             "password" => $user->getPassword(),
-            "role" => $user->getRole()
+            "Username" => $user->getUsername()
         ];
         $query->execute($parameters);
     }
 
     public function delete(User $user) : void
     {
-        $query = $this->db->prepare('DELETE FROM users WHERE id = :id');;
+        $query = $this->db->prepare('DELETE FROM user WHERE id = :id');;
         $parameters = [
             "id" => $user->getId()
         ];
