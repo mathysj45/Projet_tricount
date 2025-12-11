@@ -53,13 +53,12 @@ class AuthController extends AbstractController
         $errors=[];
         if(!empty($_POST))
         {
-            $firstName = $_POST["firstName"];
-            $lastName = $_POST["lastName"];
             $email = $_POST["email"];
             $passwordEnClair = $_POST["password"];
+            $username = $_POST["username"];
             $confirmPasswordEnClair = $_POST['confirmPassword'];
 
-            if((empty($firstName)) || (empty($lastName)) || (empty($email)) || (empty($passwordEnClair)) || (empty($confirmPasswordEnClair)))
+            if((empty($email)) || (empty($passwordEnClair)) || (empty($confirmPasswordEnClair)) || (empty($username)))
             {
                 $errors[] = "Tout les champs sont obligatoires";
             }
@@ -82,7 +81,7 @@ class AuthController extends AbstractController
             {
                 $userManager = new UserManager(); 
                 $hashedPassword = password_hash($passwordEnClair,PASSWORD_DEFAULT);
-                $user= new User($firstName, $lastName, $email, $hashedPassword);
+                $user= new User($email, $hashedPassword, $username);
                 $userManager->create($user);
                 $this->redirect('index.php?route=login');
             }
