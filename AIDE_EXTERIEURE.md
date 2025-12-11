@@ -1,0 +1,1 @@
+Nous avons utilisé Gemini principalement comme un outil d'assistance au débogage et à la compréhension des messages d'erreur. Nos interactions se limitaient essentiellement à lui soumettre nos segments de code ou les logs d'erreurs rencontrés, afin d'obtenir des corrections ciblées et des explications sur l'origine des dysfonctionnements.
