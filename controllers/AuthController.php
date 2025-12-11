@@ -55,7 +55,7 @@ class AuthController extends AbstractController
         {
             $email = $_POST["email"];
             $passwordEnClair = $_POST["password"];
-            $lastName = $_POST["username"];
+            $username = $_POST["username"];
             $confirmPasswordEnClair = $_POST['confirmPassword'];
 
             if((empty($email)) || (empty($passwordEnClair)) || (empty($confirmPasswordEnClair)) || (empty($username)))
