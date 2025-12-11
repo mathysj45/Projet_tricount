@@ -73,7 +73,7 @@ class UserManager extends AbstractManager
 
     public function update(User $user) : void
     {
-        $query = $this->db->prepare('UPDATE user SET email = :email, password = :password, username = :username WHERE id = :id');;
+        $query = $this->db->prepare('UPDATE user SET email = :email, password = :password, username = :username WHERE id = :id');
         $parameters = [
             "id" => $user->getId(),
             "email" => $user->getEmail(),
@@ -85,7 +85,7 @@ class UserManager extends AbstractManager
 
     public function delete(User $user) : void
     {
-        $query = $this->db->prepare('DELETE FROM user WHERE id = :id');;
+        $query = $this->db->prepare('DELETE FROM user WHERE id = :id');
         $parameters = [
             "id" => $user->getId()
         ];
