@@ -2,13 +2,27 @@
 
 class UserController extends AbstractController
 {
-    public function profile() :void
+    private function checkAdmin() : void
     {
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'ADMIN') {
+            $this->redirect('index.php?route=login');
+            exit;
+        }
+    }
+
+    public function profile() : void
+    {
+        if (!isset($_SESSION['id'])) {
+            $this->redirect('index.php?route=login');
+            exit;
+        }
+
         $this->render('member/profile.html.twig', []);
     }
 
     public function create() :void
     {
+        $this->checkAdmin();
         $errors=[];
         if(!empty($_POST))
         {
@@ -52,6 +66,7 @@ class UserController extends AbstractController
 
     public function update() : void
     {
+        $this->checkAdmin();
         if(isset($_GET['id'])) 
         {
             $id = (int)$_GET['id'];
@@ -89,6 +104,7 @@ class UserController extends AbstractController
 
     public function delete() : void
     {
+        $this->checkAdmin();
         $userManager = new UserManager();
         $users = $userManager->findAll();
 
@@ -107,6 +123,7 @@ class UserController extends AbstractController
 
     public function list() : void
     {
+        $this->checkAdmin();
         $userManager = new UserManager();
         $users = $userManager->findAll();
         $this->render('admin/users/index.html.twig', ['users'=>$users]);
@@ -114,6 +131,7 @@ class UserController extends AbstractController
 
     public function show() : void
     {
+        $this->checkAdmin();
 
         if(isset($_GET['id'])) 
         {

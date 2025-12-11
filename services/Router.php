@@ -25,6 +25,9 @@ class Router
             else if($_GET['route'] === 'profile') {
                 $this->uc->profile();
             }
+            else if($_GET['route'] === 'update') {
+                $this->uc->update();
+            }
             else if($_GET['route'] === 'list') {
                 $this->uc->list();
             }
