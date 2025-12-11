@@ -83,9 +83,11 @@ class UserController extends AbstractController
             $email = $_POST['email'];
             $passwordEnClair = $_POST['password'];
             $username = $_POST['username'];
+            $role = $_POST['role'];
 
             $userToUpdate->setEmail($email);
             $userToUpdate->setUsername($username);
+            $usertToUpdate->setRole($role);
 
             if (!empty($passwordEnClair)) 
             {

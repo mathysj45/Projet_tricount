@@ -19,7 +19,7 @@ class UserManager extends AbstractManager
 
         foreach($result as $item)
         {
-            $user = new User($item["email"], $item["password"], $item["username"], $item["id"]);
+            $user = new User($item["email"], $item["password"], $item["username"], $item["role"], $item["id"]);
             $users[] = $user;
         }
 
@@ -37,7 +37,7 @@ class UserManager extends AbstractManager
 
         if($item)
         {
-            return new User($item["email"], $item["password"], $item["username"], $item["id"]);
+            return new User($item["email"], $item["password"], $item["username"], $item["role"], $item["id"]);
         }
 
         return null;
@@ -54,7 +54,7 @@ class UserManager extends AbstractManager
 
         if($item)
         {
-            return new User($item["email"], $item["password"], $item["username"], $item["id"]);
+            return new User($item["email"], $item["password"], $item["username"], $item["role"], $item["id"]);
         }
 
         return null;
@@ -62,23 +62,25 @@ class UserManager extends AbstractManager
 
     public function create(User $user) : void
     {
-        $query = $this->db->prepare('INSERT INTO user (email, password, username) VALUES (:email, :password, :username)');
+        $query = $this->db->prepare('INSERT INTO user (email, password, username, role) VALUES (:email, :password, :username, :role)');
         $parameters = [
             "email" => $user->getEmail(),
             "password" => $user->getPassword(),
-            "username" => $user->getUsername()
+            "username" => $user->getUsername(),
+            "role" => $user->getRole()
         ];
         $query->execute($parameters);
     }
 
     public function update(User $user) : void
     {
-        $query = $this->db->prepare('UPDATE user SET email = :email, password = :password, username = :username WHERE id = :id');
+        $query = $this->db->prepare('UPDATE user SET email = :email, password = :password, username = :username, role = :role WHERE id = :id');
         $parameters = [
             "id" => $user->getId(),
             "email" => $user->getEmail(),
             "password" => $user->getPassword(),
-            "username" => $user->getUsername()
+            "username" => $user->getUsername(),
+            "role" => $user->getRole()
         ];
         $query->execute($parameters);
     }

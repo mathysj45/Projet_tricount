@@ -2,7 +2,7 @@
 
 class User
 {
-    public function __construct(private string $email, private string $password, private string $username, private ?int $id = null){
+    public function __construct(private string $email, private string $password, private string $username, private string $role="USER", private ?int $id = null){
 
     }
 
@@ -34,6 +34,16 @@ class User
     public function setUsername(string $username): void
     {
         $this->username = $username;
+    }
+
+    public function getRole(): string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): void
+    {
+        $this->role = $role;
     }
 
     public function getId(): ?int
