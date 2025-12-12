@@ -1,9 +1,5 @@
 {% extends "layout.html.twig" %}
 
-{# {% block header %}
-    {% include "partials/_header.html.twig" %}
-{% endblock %} #}
-
 {% block main %}
 <main class="py-5 container text-center">
     <div class="p-5 mb-4 bg-body-tertiary rounded-3">
@@ -12,7 +8,7 @@
             Gérez vos comptes entre amis simplement.<br>
             Fini les prises de tête pour savoir qui doit combien !
         </p>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
+        <div class="btn-acceuil d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
             <a href="index.php?route=login" class="btn btn-primary btn-lg px-4 gap-3">Se connecter</a>
             <a href="index.php?route=register" class="btn btn-outline-secondary btn-lg px-4">Créer un compte</a>
         </div>
