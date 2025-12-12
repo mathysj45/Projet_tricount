@@ -1,1 +1,3 @@
 Nous avons utilisé Gemini principalement comme un outil d'assistance au débogage et à la compréhension des messages d'erreur. Nos interactions se limitaient essentiellement à lui soumettre nos segments de code ou les logs d'erreurs rencontrés, afin d'obtenir des corrections ciblées et des explications sur l'origine des dysfonctionnements.
+
+Mathilde a utilisé également le code CSS ( https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.css ) utilisé dans un exercice précédent pour utiliser quelques notions et bout de code aisni que Gemini pour bien ranger et supprimer les doublons ou incohérences du CSS

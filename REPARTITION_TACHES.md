@@ -1,5 +1,3 @@
-Mathys : Responsable du routeur et des contrôleurs. J'apporte également mon aide sur les managers et le CSS de la section Teams.
+Mathys : Responsable du back-end dans son ensemble.
 
-Mathilde : Principalement en charge du développement front-end, elle assure aussi un soutien sur le back-end en cas de besoin.
-
-Alban : Gère les managers, la base de données (SQL) et la configuration du fichier .htaccess. Il participe à l'intégration CSS et a effectué des modifications sur le PageController.
+Mathilde : Responsable du front-end, elle apporte sur le back-end en cas de besoin (le côté User, une partie du remboursement, le coté ADMIN, et la liste des bénéficiares).
