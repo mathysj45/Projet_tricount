@@ -1,0 +1,48 @@
+{% extends "layout.html.twig" %}
+
+{% block header %}
+    {% include "partials/_header-user.html.twig" %}
+{% endblock %}
+
+{% block main %}
+<main class="container py-5">
+    <h1>Faire un remboursement</h1>
+    <p class="lead">Indiquez ici l'argent que vous avez rendu à quelqu'un.</p>
+
+    {% if errors is defined and errors is not empty %}
+        <div class="alert alert-danger">
+            <ul>
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form method="post" action="index.php?route=add_reimbursement">
+        <fieldset class="mb-3">
+            <label class="form-label">Je rembourse à :</label>
+            <select name="to_user_id" class="form-select" required>
+                <option value="">Choisir un ami...</option>
+                {% for user in users %}
+                    {% if user.getId() != session.user.getId() %}
+                        <option value="{{ user.getId() }}">{{ user.getUsername() }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </fieldset>
+
+        <fieldset class="mb-3">
+            <label class="form-label">Montant (€)</label>
+            <input type="number" step="0.01" name="amount" class="form-control" placeholder="Ex: 15.00" required>
+        </fieldset>
+
+        <fieldset class="mb-3">
+            <label class="form-label">Date</label>
+            <input type="date" name="date" class="form-control" required>
+        </fieldset>
+
+        <button type="submit" class="btn btn-primary">Valider le remboursement</button>
+    </form>
+</main>
+{% endblock %}

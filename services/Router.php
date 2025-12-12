@@ -40,11 +40,14 @@ class Router
             else if($_GET['route'] === 'expense') {
                 $this->uc->expense();
             }
-            else if($_GET['route'] === 'reimbursement') {
-                $this->rc->details();
-            }
             else if($_GET['route'] === 'add_expense') {
                 $this->ec->add();
+            }
+            else if($_GET['route'] === 'reimbursement') {
+            $this->rc->details(); 
+            }
+            else if($_GET['route'] === 'add_reimbursement') {
+            $this->rc->add(); 
             }
             else if($_GET['route'] === 'delete') {
                 $this->uc->delete();
