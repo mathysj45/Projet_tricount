@@ -7,17 +7,21 @@
 {% block main %}
     <main>
         <div class="container py-5">
-            <h3>J'ai remboursé</h3>
+            <h2>J'ai remboursé</h2>
 
             {% for item in totals.given %}
-                <h5 class="card-title">À {{ item.username }}: {{ item.total_amount }} €</h5>
+                <div class="card mt-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">À {{ item.username }}: {{ item.total_amount }} €</h5>
+                    <div>
+                </div>
             {% else %}
-                <h6>Rien pour le moment.</h6>
+                <p>Rien pour le moment.</p>
             {% endfor %}
         </div>
 
         <div class="container py-5">
-            <h1>On m'a remboursé:</h1>
+            <h2>On m'a remboursé:</h2>
             
             {% for item in totals.received %}
                 <div class="card mt-3" style="width: 18rem;">
@@ -28,7 +32,7 @@
                     </div>
                 </div>
             {% else %}
-                <p>Erreur : données utilisateur non disponibles.</p>
+                <p>Rien pour le moment.</p>
             {% endfor %}
         </div>
     </main>
