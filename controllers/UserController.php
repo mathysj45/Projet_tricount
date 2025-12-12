@@ -11,6 +11,14 @@ class UserController extends AbstractController
         }
     }
 
+    private function checkLoggedIn(): void
+    {
+        if (!isset($_SESSION['user'])) {
+            $this->redirect('index.php?route=login');
+            exit;
+        }
+    }
+
     public function profile() : void
     {
         if (!isset($_SESSION['user'])) {
@@ -147,17 +155,13 @@ class UserController extends AbstractController
             ]);
         }
     }
-        public function member() : void
-        {
-            if(isset($_GET['id'])) 
-            {
-                $id = (int)$_GET['id'];
-                $userManager = new UserManager();
-                $user = $userManager->findById($id);
 
-                $this->render('member/member.html.twig', [
-                    'user' => $user
-                ]);
-            }
-        }
+    public function member() : void
+    {
+        $this->checkLoggedIn();
+        $userManager = new UserManager();
+        $users = $userManager->findAll();
+        $this->render('member/member.html.twig', ['users' => $users]);
+        
+    }
 }

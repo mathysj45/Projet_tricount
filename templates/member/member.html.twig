@@ -6,8 +6,8 @@
 
 {% block main %}
     <main class="container py-5">
-        <h1>Détails utilisateur</h1>
-        {% if user is defined and user is not null %}
+        <h1>Utilisateurs</h1>
+        {% for user in users %}
         <div class="card mt-3" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">Username: {{ user.username }} </h5>
@@ -16,6 +16,6 @@
         </div>
         {% else %}
         <p>Erreur : données utilisateur non disponibles.</p>
-        {% endif %}
+        {% endfor %}
     </main>
 {% endblock %}
