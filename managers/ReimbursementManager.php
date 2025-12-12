@@ -3,18 +3,19 @@
 class ReimbursementManager extends AbstractManager
 {
 
-    public function create(Reimbursement $reimbursement): void
+    public function create(Reimbursement $reimbursement, ?int $expenseId = null): void
     {
         $query = $this->db->prepare('
-            INSERT INTO reimbursement (amount, date, from_user_id, to_user_id) 
-            VALUES (:amount, :date, :from_user_id, :to_user_id)
+            INSERT INTO reimbursement (amount, date, from_user_id, to_user_id, expense_id) 
+            VALUES (:amount, :date, :from_user_id, :to_user_id, :expense_id)
         ');
         
         $parameters = [
             'amount' => $reimbursement->getAmount(),
             'date' => $reimbursement->getDate(),
             'from_user_id' => $reimbursement->getFromUserId(),
-            'to_user_id' => $reimbursement->getToUserId()
+            'to_user_id' => $reimbursement->getToUserId(),
+            'expense_id' => $expenseId
         ];
         
         $query->execute($parameters);

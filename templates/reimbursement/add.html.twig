@@ -20,6 +20,7 @@
     {% endif %}
 
     <form method="post" action="index.php?route=add_reimbursement">
+    <input type="hidden" name="expense_id" value="{{ expense_id }}">
         <fieldset class="mb-3">
             <label class="form-label">Je rembourse à :</label>
             <select name="to_user_id" class="form-select" required>

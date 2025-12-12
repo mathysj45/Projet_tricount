@@ -8,6 +8,7 @@ class ExpenseManager extends AbstractManager
                 FROM expense e
                 JOIN user u ON e.user_id = u.id
                 JOIN category c ON e.category_id = c.id
+                WHERE e.is_settled = 0
                 ORDER BY e.date DESC";
                 
         $query = $this->db->prepare($sql);
@@ -34,6 +35,18 @@ class ExpenseManager extends AbstractManager
         return $expenses;
     }
 
+    public function findById(int $id) : ?Expense
+    {
+        $query = $this->db->prepare('SELECT * FROM expense WHERE id = :id');
+        $query->execute(["id" => $id]);
+        $item = $query->fetch(PDO::FETCH_ASSOC);
+
+        if($item) {
+            return new Expense($item["title"], (float)$item["amount"], $item["date"], $item["user_id"], $item["category_id"], $item["id"]);
+        }
+        return null;
+    }
+
     public function create(Expense $expense, array $participants) : void
     {
         $query = $this->db->prepare('INSERT INTO expense (title, amount, date, user_id, category_id) VALUES (:title, :amount, :date, :user_id, :category_id)');
@@ -56,5 +69,19 @@ class ExpenseManager extends AbstractManager
                 "user_id" => $participantId
             ]);
         }
+    }
+
+    public function markAsSettled(int $expenseId) : void
+    {
+        $query = $this->db->prepare('UPDATE expense SET is_settled = 1 WHERE id = :id');
+        $query->execute(['id' => $expenseId]);
+    }
+    
+    public function getTotalReimbursedForExpense(int $expenseId) : float
+    {
+        $query = $this->db->prepare('SELECT SUM(amount) as total FROM reimbursement WHERE expense_id = :id');
+        $query->execute(['id' => $expenseId]);
+        $result = $query->fetch();
+        return (float) ($result['total'] ?? 0);
     }
 }
