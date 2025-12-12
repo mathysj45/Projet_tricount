@@ -27,42 +27,61 @@ class ReimbursementController extends AbstractController
     {
         $this->checkLoggedIn();
         $errors = [];
-        
         $userManager = new UserManager();
         $users = $userManager->findAll();
+        $preselectedExpenseId = null;
+        $preselectedAmount = "";
+        $preselectedToUser = "";
 
-        if (!empty($_POST)) {
-            $amount = $_POST['amount'];
+        if (isset($_GET['expense_id'])) 
+        {
+            $expenseManager = new \ExpenseManager();
+            $preselectedExpenseId = $_GET['expense_id'];
+        }
+
+        if (!empty($_POST))
+        {
+            $amount = (float) $_POST['amount'];
             $date = $_POST['date'];
-            $toUserId = $_POST['to_user_id'];
+            $toUserId = (int) $_POST['to_user_id'];
+            $expenseId = !empty($_POST['expense_id']) ? (int) $_POST['expense_id'] : null;
             $fromUserId = $_SESSION['user']->getId();
 
-            if (empty($amount) || empty($date) || empty($toUserId)) {
+            if (empty($amount) || empty($date) || empty($toUserId)) 
+            {
                 $errors[] = "Tous les champs sont obligatoires.";
             }
 
-            if ($toUserId == $fromUserId) {
+            if ($toUserId == $fromUserId) 
+            {
                 $errors[] = "Vous ne pouvez pas vous rembourser vous-même (ce serait trop beau).";
             }
 
-            if (empty($errors)) {
-                $reimbursement = new Reimbursement(
-                    (float)$amount, 
-                    $date, 
-                    $fromUserId, 
-                    (int)$toUserId
-                );
-                
-                $manager = new ReimbursementManager();
-                $manager->create($reimbursement);
+            if (empty($errors)) 
+            {
+                $reimbursement = new Reimbursement($amount, $date, $fromUserId, $toUserId);
+                $reimbursementManager = new ReimbursementManager();
+                $reimbursementManager->create($reimbursement, $expenseId);
 
-                $this->redirect('index.php?route=reimbursement');
+                if ($expenseId) 
+                {
+                    $expenseManager = new ExpenseManager();
+                    $expense = $expenseManager->findById($expenseId);
+                    $totalReimbursed = $expenseManager->getTotalReimbursedForExpense($expenseId);
+                    if ($expense && $totalReimbursed >= $expense->getAmount())
+                    {
+                        $expenseManager->markAsSettled($expenseId);
+                    }
+                }
+
+                $this->redirect('index.php?route=dashboard');
             }
         }
 
         $this->render('reimbursement/add.html.twig', [
             'users' => $users,
-            'errors' => $errors
+            'errors' => $errors,
+            'expense_id' => $preselectedExpenseId
         ]);
     }
 }
