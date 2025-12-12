@@ -147,4 +147,17 @@ class UserController extends AbstractController
             ]);
         }
     }
+        public function member() : void
+        {
+            if(isset($_GET['id'])) 
+            {
+                $id = (int)$_GET['id'];
+                $userManager = new UserManager();
+                $user = $userManager->findById($id);
+
+                $this->render('member/member.html.twig', [
+                    'user' => $user
+                ]);
+            }
+        }
 }

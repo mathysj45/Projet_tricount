@@ -61,6 +61,9 @@ class Router
             else if($_GET['route'] === 'dashboard') {
                 $this->ac->dashboard();
             }
+            else if($_GET['route'] === 'member') {
+                $this->uc->member();
+            }
             else
             {
                 $this->ac->notFound();
