@@ -5,17 +5,21 @@ class Router
     private AuthController $ac;
     private UserController $uc;
     private ExpenseController $ec;
+    private ReimbursementController $rc;
     public function __construct()
     {
         $this->ac = new AuthController();
         $this->uc = new UserController();
         $this->ec = new ExpenseController();
+        $this->rc = new ReimbursementController();
     }
 
     public function handleRequest() : void
     {
-        if(!empty($_GET['route'])) {
-            if($_GET['route'] === 'login') {
+        if(!empty($_GET['route'])) 
+        {
+            if($_GET['route'] === 'login') 
+            {
                 $this->ac->login();
             }
             else if($_GET['route'] === 'register') {
@@ -37,7 +41,7 @@ class Router
                 $this->uc->expense();
             }
             else if($_GET['route'] === 'reimbursement') {
-                $this->uc->reimbursement();
+                $this->rc->details();
             }
             else if($_GET['route'] === 'add_expense') {
                 $this->ec->add();
