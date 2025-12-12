@@ -51,6 +51,12 @@ class Router
             else if($_GET['route'] === 'create') {
                 $this->uc->create();
             }
+            else if($_GET['route'] === 'home') {
+            $this->ac->home();
+            }
+            else if($_GET['route'] === 'dashboard') {
+                $this->ac->dashboard();
+            }
             else
             {
                 $this->ac->notFound();

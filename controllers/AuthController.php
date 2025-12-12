@@ -7,6 +7,20 @@ class AuthController extends AbstractController
         $this->render('home/home.html.twig', []);
     }
 
+    public function dashboard() : void
+    {
+        if (!isset($_SESSION['user'])) {
+            $this->redirect('index.php?route=login');
+        }
+
+        $expenseManager = new ExpenseManager();
+        $expenses = $expenseManager->findAll();
+        
+        $this->render('member/dashboard.html.twig', [
+            'expenses' => $expenses
+        ]);
+    }
+
     public function login() : void
     {
         $errors=[];
@@ -27,7 +41,7 @@ class AuthController extends AbstractController
                 if ($user !== null && password_verify($passwordEnClair, $user->getPassword()))
                 {
                     $_SESSION['user'] = $user;
-                    $this->redirect('index.php?route=profile');
+                    $this->redirect('index.php?route=dashboard');
                 }
                 else
                 {

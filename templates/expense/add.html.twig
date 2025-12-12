@@ -49,19 +49,18 @@
                 </select>
             </fieldset>
 
-            <fieldset class="mb-3">
-                <label class="form-label">Qui est concerné ?</label>
-                
-                <div class="card p-3 text-dark"> 
-                    {% for user in users %}
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="participants[]" value="{{ user.getId() }}" id="user_{{ user.getId() }}">
-                            <label class="form-check-label" for="user_{{ user.getId() }}">
-                                {{ user.getUsername() }}
-                            </label>
-                        </div>
-                    {% endfor %}
-                </div>
+            <div class="mb-3">
+            <label class="form-label">Qui est concerné ?</label>
+            <div class="card p-3">
+                {% for user in users %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="participants[]" value="{{ user.getId() }}" id="user_{{ user.getId() }}">
+                        <label class="form-check-label" for="user_{{ user.getId() }}">
+                            {{ user.getUsername() }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
                 <div class="form-text text-light">Cochez toutes les personnes impliquées (vous y compris).</div>
             </fieldset>
 

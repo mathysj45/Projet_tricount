@@ -11,6 +11,7 @@ class AbstractController
         ]);
 
         $twig->addExtension(new \Twig\Extension\DebugExtension());
+        $twig->addGlobal('session', $_SESSION);
 
         $this->twig = $twig;
     }
