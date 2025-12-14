@@ -1,0 +1,3 @@
+Nous avons un .gitignore pour le dossier vendor et le fichier composer.lock il faudra donc faire les installations nécessaire.
+Notre database est faite avec la méthode docker et non xamp, il faudra donc la lancer avec docker. Le mot de passe est mis par défaut
+dans le .env.
