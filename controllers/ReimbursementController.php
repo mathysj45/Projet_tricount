@@ -35,7 +35,7 @@ class ReimbursementController extends AbstractController
 
         if (isset($_GET['expense_id'])) 
         {
-            $expenseManager = new \ExpenseManager();
+            $expenseManager = new ExpenseManager();
             $preselectedExpenseId = $_GET['expense_id'];
         }
 
